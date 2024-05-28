@@ -1,15 +1,10 @@
 from aiogram import Bot, Dispatcher, types, executor
 from config import TELEGRAM_TOKEN
 from keyboard.keyboards import get_keyboard_1, get_keyboard_2
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from keyboard.key_inline import get_keyboard_inline, get_keyboard_inline_2
 
 bot = Bot(token = TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
-
-keyboard_inline = InlineKeyboardMarkup(row_width= 1)
-but_inline = InlineKeyboardButton('Посмотреть', url='https://www.purina.ru/cats/breed-library')
-but_inline2 = InlineKeyboardButton('Посмотреть', url='https://www.purina.ru/cats/breed-library')
-keyboard_inline.add(but_inline, but_inline2)
 
 @dp.message_handler(commands= 'start')
 async def start(message: types.Message):
@@ -17,7 +12,7 @@ async def start(message: types.Message):
 
 @dp.message_handler(lambda message: message.text == 'Отправь фото кота')
 async def button_1_click(message: types.Message):
-    await bot.send_photo(message.chat.id, photo= 'https://clck.ru/3Asn6h', caption= 'Вот тебе кот!', reply_markup=keyboard_inline)
+    await bot.send_photo(message.chat.id, photo= 'https://clck.ru/3Asn6h', caption= 'Вот тебе кот!', reply_markup=get_keyboard_inline())
 
 @dp.message_handler(lambda message: message.text == 'Перейти на следующую клавиатуру')
 async def button_2_click(message: types.Message):
@@ -25,7 +20,7 @@ async def button_2_click(message: types.Message):
 
 @dp.message_handler(lambda message: message.text == 'Отправь фото собаки')
 async def button_3_click(message: types.Message):
-    await bot.send_photo(message.chat.id, photo= 'https://clck.ru/3Aso98', caption= 'Вот тебе собака!')
+    await bot.send_photo(message.chat.id, photo= 'https://clck.ru/3Aso98', caption= 'Вот тебе собака!', reply_markup=get_keyboard_inline_2())
 
 @dp.message_handler(lambda message: message.text == 'Перейти на первую клавиатуру')
 async def button_2_click(message: types.Message):
